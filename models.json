@@ -1,0 +1,242 @@
+[
+ {
+  "id": "caixa",
+  "nome": "Caixa com tampa",
+  "palavras": [
+   "caixa",
+   "caixinha",
+   "estojo",
+   "organizador",
+   "porta"
+  ],
+  "dica": "Paredes de 2 mm imprimem bem em qualquer impressora.",
+  "params": [
+   [
+    "largura",
+    60,
+    "Largura (mm)",
+    10,
+    200
+   ],
+   [
+    "profundidade",
+    40,
+    "Profundidade (mm)",
+    10,
+    200
+   ],
+   [
+    "altura",
+    25,
+    "Altura (mm)",
+    5,
+    100
+   ],
+   [
+    "parede",
+    2,
+    "Espessura da parede (mm)",
+    1,
+    6
+   ]
+  ],
+  "scad": "difference(){cube([largura,profundidade,altura]);translate([parede,parede,parede])cube([largura-2*parede,profundidade-2*parede,altura]);}"
+ },
+ {
+  "id": "chaveiro",
+  "nome": "Chaveiro com texto",
+  "palavras": [
+   "chaveiro",
+   "nome",
+   "texto",
+   "letra",
+   "placa",
+   "plaquinha"
+  ],
+  "dica": "Só letras A-Z e números. O relevo de 1,5 mm sobre a base fica legível.",
+  "params": [
+   [
+    "texto",
+    "MEU NOME",
+    "Texto (A-Z, 0-9)",
+    0,
+    0
+   ],
+   [
+    "tamanho",
+    10,
+    "Tamanho da letra (mm)",
+    5,
+    30
+   ],
+   [
+    "base",
+    3,
+    "Espessura da base (mm)",
+    2,
+    8
+   ]
+  ],
+  "scad": "chars=\"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ \";g=[[62,81,73,69,62],[0,66,127,64,0],[66,97,81,73,70],[33,65,69,75,49],[24,20,18,127,16],[39,69,69,69,57],[60,74,73,73,48],[1,113,9,5,3],[54,73,73,73,54],[6,73,73,41,30],[126,17,17,17,126],[127,73,73,73,54],[62,65,65,65,34],[127,65,65,34,28],[127,73,73,73,65],[127,9,9,9,1],[62,65,73,73,122],[127,8,8,8,127],[0,65,127,65,0],[32,64,65,63,1],[127,8,20,34,65],[127,64,64,64,64],[127,2,12,2,127],[127,4,8,16,127],[62,65,65,65,62],[127,9,9,9,6],[62,65,81,33,94],[127,9,25,41,70],[70,73,73,73,49],[1,1,127,1,1],[63,64,64,64,63],[31,32,64,32,31],[63,64,56,64,63],[99,20,8,20,99],[7,8,112,8,7],[97,81,73,69,67]];px=tamanho/7;n=len(texto);w=n*6*px;m=px*2;h=7*px+2*m;hd=h*0.6;difference(){translate([-hd-m,-m,0])cube([w+hd+2*m,h,base]);translate([-hd/2-m/2,h/2-m,-1])cylinder(d=hd*0.55,h=base+2,$fn=40);}for(i=[0:n-1])let(k=search(texto[i],chars)[0])if(k!=undef&&k<36)for(c=[0:4])for(r=[0:6])if(floor(g[k][c]/pow(2,r))%2==1)translate([(i*6+c)*px,(6-r)*px,base-0.01])cube([px+0.01,px+0.01,1.5]);"
+ },
+ {
+  "id": "vaso",
+  "nome": "Vaso torneado",
+  "palavras": [
+   "vaso",
+   "copo",
+   "pote",
+   "jarro",
+   "planta"
+  ],
+  "dica": "Vasos finos pedem o modo espiral (vase mode) no fatiador.",
+  "params": [
+   [
+    "altura",
+    80,
+    "Altura (mm)",
+    30,
+    200
+   ],
+   [
+    "raio",
+    30,
+    "Raio da boca (mm)",
+    10,
+    80
+   ],
+   [
+    "cintura",
+    20,
+    "Raio da cintura (mm)",
+    5,
+    60
+   ],
+   [
+    "parede",
+    2,
+    "Espessura da parede (mm)",
+    1,
+    5
+   ]
+  ],
+  "scad": "function r(t)=cintura+(raio-cintura)*pow(2*t-1,2);module fora(){polygon(concat([for(i=[0:24])[r(i/24),i/24*altura]],[[0,altura],[0,0]]));}module dentro(){polygon(concat([for(i=[0:24])[max(r(i/24)-parede,0.1),parede+i/24*altura]],[[0,parede+altura],[0,parede]]));}rotate_extrude($fn=64)difference(){fora();dentro();}"
+ },
+ {
+  "id": "suporte",
+  "nome": "Suporte de celular",
+  "palavras": [
+   "suporte",
+   "celular",
+   "telefone",
+   "apoio",
+   "tablet",
+   "stand"
+  ],
+  "dica": "Inclinação de 60 graus é boa para vídeo e digitação.",
+  "params": [
+   [
+    "largura",
+    70,
+    "Largura (mm)",
+    40,
+    120
+   ],
+   [
+    "espessura",
+    12,
+    "Espessura do aparelho (mm)",
+    6,
+    20
+   ],
+   [
+    "angulo",
+    60,
+    "Inclinação (graus)",
+    30,
+    80
+   ]
+  ],
+  "scad": "difference(){cube([largura,50,30]);translate([-1,10,8])rotate([90-angulo+30,0,0])translate([0,-espessura,0])cube([largura+2,espessura+2,60]);}translate([0,0,0])cube([largura,6,12]);"
+ },
+ {
+  "id": "engrenagem",
+  "nome": "Engrenagem",
+  "palavras": [
+   "engrenagem",
+   "roda",
+   "dentada",
+   "gear",
+   "pinhao"
+  ],
+  "dica": "Duas engrenagens só encaixam com o mesmo tamanho de dente.",
+  "params": [
+   [
+    "dentes",
+    20,
+    "Número de dentes",
+    8,
+    60
+   ],
+   [
+    "raio",
+    20,
+    "Raio (mm)",
+    8,
+    60
+   ],
+   [
+    "espessura",
+    6,
+    "Espessura (mm)",
+    2,
+    20
+   ],
+   [
+    "furo",
+    5,
+    "Furo central (mm)",
+    0,
+    20
+   ]
+  ],
+  "scad": "difference(){linear_extrude(espessura)union(){circle(r=raio,$fn=96);for(i=[0:dentes-1])rotate(i*360/dentes)translate([raio-1,-raio*0.08])square([raio*0.2,raio*0.16]);}translate([0,0,-1])cylinder(d=furo,h=espessura+2,$fn=40);}"
+ },
+ {
+  "id": "porta_lapis",
+  "nome": "Porta-lápis",
+  "palavras": [
+   "lapis",
+   "lápis",
+   "caneta",
+   "mesa",
+   "escritorio",
+   "escritório"
+  ],
+  "dica": "Base mais larga que o topo evita que tombe.",
+  "params": [
+   [
+    "raio",
+    35,
+    "Raio (mm)",
+    20,
+    60
+   ],
+   [
+    "altura",
+    90,
+    "Altura (mm)",
+    40,
+    160
+   ],
+   [
+    "furos",
+    6,
+    "Número de furos",
+    1,
+    12
+   ]
+  ],
+  "scad": "difference(){cylinder(r=raio,h=altura,$fn=72);for(i=[0:furos-1])rotate(i*360/furos)translate([raio*0.55,0,6])cylinder(d=10,h=altura,$fn=32);translate([0,0,6])cylinder(r=raio*0.28,h=altura,$fn=48);}"
+ }
+]

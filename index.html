@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oficina 3D | Crie objetos 3D com um assistente</title>
+<meta name="description" content="Editor 3D online no estilo OpenSCAD, com assistente em português. Exporta STL, 3MF, OBJ e AMF. Roda inteiro no navegador.">
+<meta name="theme-color" content="#101820"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧊</text></svg>">
+<link rel="stylesheet" href="style.css"></head><body>
+<header id="top"><b class="logo">Oficina 3D</b><span id="st" role="status">Carregando motor…</span>
+<select id="fmt" aria-label="Formato de exportação"><option value="stl">STL</option><option value="3mf">3MF</option><option value="obj">OBJ</option><option value="amf">AMF</option><option value="off">OFF</option></select>
+<button id="exp" class="p">Baixar</button></header>
+<main><div id="view"><canvas id="cv"></canvas><div id="info"></div></div>
+<aside id="side"><nav id="tabs" role="tablist"><button data-t="chat" class="on">Assistente</button><button data-t="mod">Modelos</button><button data-t="code">Código</button></nav>
+<section id="chat" class="pane on"><div id="log" aria-live="polite"></div><div class="send"><input id="msg" placeholder="Ex.: quero um vaso de 100 mm de altura" enterkeyhint="send" autocomplete="off"><button id="go" class="p">Enviar</button></div></section>
+<section id="mod" class="pane"><div id="cards"></div><div id="pars"></div></section>
+<section id="code" class="pane"><textarea id="src" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Código OpenSCAD"></textarea><pre id="err"></pre></section></aside></main>
+<script src="vendor/three.min.js"></script><script src="vendor/OrbitControls.js"></script>
+<script type="module" src="app.js"></script></body></html>
